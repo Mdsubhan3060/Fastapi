@@ -12,3 +12,5 @@ class UserResponse(BaseModel):
     id: int
     username: str
     email: str
+class RefreshTokenRequest(BaseModel):
+    refresh_token: str

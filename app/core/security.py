@@ -29,10 +29,11 @@ def verify_password(
 
 
 def create_access_token(user_id: int) -> str:
-    expire_token=datetime.now(timezone.utc)+timedelta(seconds=20)
+    expire_token=datetime.now(timezone.utc)+timedelta(minutes=2)
     payload = {
         "sub": str(user_id),
-        "exp":expire_token
+        "exp":expire_token,
+        "type":"access"
     }
 
     token = jwt.encode(
@@ -54,3 +55,17 @@ def decode_access_token(token: str):
 
     except jwt.InvalidTokenError:
         return None
+def create_refresh_token(user_id: int):
+    expire = datetime.now(timezone.utc) + timedelta(days=7)
+
+    payload = {
+        "sub": str(user_id),
+        "exp": expire,
+        "type": "refresh"
+    }
+
+    return jwt.encode(
+        payload,
+        SECRET_KEY,
+        algorithm=ALGORITHM
+    )
