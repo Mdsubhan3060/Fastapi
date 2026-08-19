@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, String
 
+
 from app.database.connection import Base
 
 
@@ -25,4 +26,9 @@ class User(Base):
     password_hash = Column(
         String,
         nullable=False
+    )
+    role = Column(
+        String,
+        nullable=False,
+        default="user"
     )
