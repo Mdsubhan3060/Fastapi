@@ -29,7 +29,7 @@ def verify_password(
 
 
 def create_access_token(user_id: int) -> str:
-    expire_token=datetime.now(timezone.utc)+timedelta(minutes=2)
+    expire_token=datetime.now(timezone.utc)+timedelta(minutes=20)
     payload = {
         "sub": str(user_id),
         "exp":expire_token,
