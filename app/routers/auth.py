@@ -54,7 +54,7 @@ async def login(
         "token_type": "bearer"
     }
     
-@router.get("users")
+@router.get("/users",response_model=list[UserResponse])
 async def users( db: AsyncSession = Depends(get_db)):
     result=await get_user(db)
     if result is None:
